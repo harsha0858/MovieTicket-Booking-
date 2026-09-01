@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>MovieBook</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo">
+        🎬 Movie<span>Book</span>
+    </div>
+
+    <nav>
+
+        <a href="#home">Home</a>
+
+        <a href="#movies">Movies</a>
+
+        <a href="#bookings">My Bookings</a>
+
+    </nav>
+
+    <div class="nav-actions">
+
+        <span id="userName"></span>
+
+        <button id="themeBtn">
+            🌙
+        </button>
+
+        <button
+            id="logoutBtn"
+            class="logout-btn"
+        >
+            Logout
+        </button>
+
+    </div>
+
+</header>
+
+
+<main>
+
+<!-- HERO -->
+
+<section
+    id="home"
+    class="hero"
+>
+
+    <div class="hero-content">
+
+        <p class="small-title">
+            ✨ PREMIUM CINEMA EXPERIENCE
+        </p>
+
+        <h1>
+            Dream Movies.
+            <br>
+            Premium Seats.
+            <br>
+            <span>Unforgettable Moments.</span>
+        </h1>
+
+        <p>
+            Book your favourite movie,
+            choose your perfect seat
+            and enjoy the magic.
+        </p>
+
+        <button
+            id="exploreBtn"
+            class="primary-btn"
+        >
+            Explore Movies →
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- MOVIES -->
+
+<section
+    id="movies"
+    class="section"
+>
+
+    <div class="section-header">
+
+        <div>
+
+            <p class="small-title">
+                NOW SHOWING
+            </p>
+
+            <h2>Choose Your Movie</h2>
+
+        </div>
+
+        <input
+            id="searchInput"
+            type="text"
+            placeholder="🔍 Search movie..."
+        >
+
+    </div>
+
+
+    <div class="filters">
+
+        <button
+            class="filter-btn active"
+            data-genre="All"
+        >
+            All
+        </button>
+
+        <button
+            class="filter-btn"
+            data-genre="Action"
+        >
+            Action
+        </button>
+
+        <button
+            class="filter-btn"
+            data-genre="Drama"
+        >
+            Drama
+        </button>
+
+        <button
+            class="filter-btn"
+            data-genre="Comedy"
+        >
+            Comedy
+        </button>
+
+        <button
+            class="filter-btn"
+            data-genre="Sci-Fi"
+        >
+            Sci-Fi
+        </button>
+
+    </div>
+
+
+    <div
+        id="movieContainer"
+        class="movie-container"
+    ></div>
+
+</section>
+
+
+<!-- BOOKING -->
+
+<section
+    id="bookingSection"
+    class="section hidden"
+>
+
+    <div class="booking-top">
+
+        <button
+            id="backBtn"
+            class="back-btn"
+        >
+            ← Back
+        </button>
+
+        <h2>Book Your Ticket</h2>
+
+    </div>
+
+
+    <div class="booking-layout">
+
+        <div class="booking-main">
+
+            <div
+                id="selectedMovieInfo"
+                class="selected-movie-info"
+            ></div>
+
+
+            <!-- DATE -->
+
+            <div class="booking-box">
+
+                <h3>Select Date</h3>
+
+                <div
+                    id="dateContainer"
+                    class="date-container"
+                ></div>
+
+            </div>
+
+
+            <!-- THEATRE -->
+
+            <div class="booking-box">
+
+                <h3>Select Theatre</h3>
+
+                <div
+                    id="theatreContainer"
+                    class="theatre-container"
+                ></div>
+
+            </div>
+
+
+            <!-- TIME -->
+
+            <div class="booking-box">
+
+                <h3>Select Show Time</h3>
+
+                <div
+                    id="timeContainer"
+                    class="time-container"
+                ></div>
+
+            </div>
+
+
+            <!-- SEATS -->
+
+            <div class="booking-box">
+
+                <div class="seat-header">
+
+                    <h3>Select Seats</h3>
+
+                    <div class="seat-legend">
+
+                        <span>
+                            <i class="available"></i>
+                            Available
+                        </span>
+
+                        <span>
+                            <i class="selected"></i>
+                            Selected
+                        </span>
+
+                        <span>
+                            <i class="booked"></i>
+                            Booked
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="screen">
+                    SCREEN
+                </div>
+
+
+                <div
+                    id="seatContainer"
+                    class="seat-container"
+                ></div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SUMMARY -->
+
+        <aside class="booking-summary">
+
+            <h3>🎟️ Booking Summary</h3>
+
+            <div id="summaryContent">
+
+                <p>
+                    Select your movie and seats.
+                </p>
+
+            </div>
+
+            <button
+                id="bookBtn"
+                class="primary-btn full-btn"
+            >
+                Confirm Booking
+            </button>
+
+        </aside>
+
+    </div>
+
+</section>
+
+
+<!-- BOOKINGS -->
+
+<section
+    id="bookings"
+    class="section"
+>
+
+    <div class="section-header">
+
+        <div>
+
+            <p class="small-title">
+                YOUR HISTORY
+            </p>
+
+            <h2>My Bookings</h2>
+
+        </div>
+
+        <button
+            id="clearBookingsBtn"
+            class="danger-btn"
+        >
+            Clear All
+        </button>
+
+    </div>
+
+
+    <div
+        id="bookingHistory"
+        class="booking-history"
+    ></div>
+
+</section>
+
+</main>
+
+
+<div
+    id="toast"
+    class="toast"
+>
+
+    <span id="toastMessage"></span>
+
+</div>
+
+
+<script
+    type="module"
+    src="./js/app.js"
+></script>
+
+</body>
+</html>
