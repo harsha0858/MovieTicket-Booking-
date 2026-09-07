@@ -16,93 +16,57 @@ import {
     getBookedSeats
 } from "./storage.js";
 
-
-const currentUser =
-    getCurrentUser();
-
-
+const currentUser = getCurrentUser();
 if (!currentUser) {
 
     window.location.href =
         "./login.html";
-
 }
 
-
 const movieContainer =
-    document.querySelector(
-        "#movieContainer"
-    );
+    document.querySelector( "#movieContainer" );
 
 const searchInput =
-    document.querySelector(
-        "#searchInput"
-    );
+    document.querySelector( "#searchInput" );
 
 const bookingSection =
-    document.querySelector(
-        "#bookingSection"
-    );
+    document.querySelector( "#bookingSection" );
 
 const moviesSection =
-    document.querySelector(
-        "#movies"
-    );
+    document.querySelector( "#movies" );
 
 const selectedMovieInfo =
-    document.querySelector(
-        "#selectedMovieInfo"
-    );
+    document.querySelector(  "#selectedMovieInfo" );
 
 const dateContainer =
-    document.querySelector(
-        "#dateContainer"
-    );
+    document.querySelector( "#dateContainer" );
 
 const theatreContainer =
-    document.querySelector(
-        "#theatreContainer"
-    );
+    document.querySelector( "#theatreContainer" );
 
 const timeContainer =
-    document.querySelector(
-        "#timeContainer"
-    );
+    document.querySelector(  "#timeContainer" );
 
 const seatContainer =
-    document.querySelector(
-        "#seatContainer"
-    );
+    document.querySelector( "#seatContainer" );
 
 const summaryContent =
-    document.querySelector(
-        "#summaryContent"
-    );
+    document.querySelector(  "#summaryContent" );
 
 const bookingHistory =
-    document.querySelector(
-        "#bookingHistory"
-    );
+    document.querySelector(  "#bookingHistory" );
 
 const userName =
-    document.querySelector(
-        "#userName"
-    );
+    document.querySelector( "#userName" );
 
 const toast =
-    document.querySelector(
-        "#toast"
-    );
+    document.querySelector(  "#toast" );
 
 const toastMessage =
-    document.querySelector(
-        "#toastMessage"
-    );
-
+    document.querySelector(  "#toastMessage" );
 
 userName.innerText =
     `Hi, ${currentUser.name}`;
-
 
 let allMovies = [];
 
@@ -116,13 +80,11 @@ let selectedTime = null;
 
 let selectedSeats = [];
 
-
 const theatres = [
     "PVR Cinemas",
     "INOX",
     "KG Cinemas"
 ];
-
 
 const times = [
     "10:00 AM",
@@ -132,35 +94,20 @@ const times = [
     "10:00 PM"
 ];
 
-
 const showToast = (
     message
 ) => {
-
-    toastMessage.innerText =
-        message;
-
-    toast.classList.add(
-        "show"
-    );
+    toastMessage.innerText =  message;
+     toast.classList.add( "show" );
 
     setTimeout(() => {
-
-        toast.classList.remove(
-            "show"
-        );
-
+        toast.classList.remove( "show"  );
     }, 2500);
-
 };
-
 
 const renderMovies = (
     movieList
-) => {
-
-    movieContainer.innerHTML = "";
-
+) => { movieContainer.innerHTML = "";
 
     if (!movieList.length) {
 
@@ -170,20 +117,12 @@ const renderMovies = (
             </p>`;
 
         return;
-
     }
-
-
     movieList.forEach(movie => {
 
-        const card =
-            document.createElement(
-                "div"
-            );
+        const card =  document.createElement("div"  );
 
-        card.className =
-            "movie-card";
-
+        card.className ="movie-card";
 
         card.innerHTML = `
 
@@ -222,25 +161,14 @@ const renderMovies = (
                 >
                     Book Now
                 </button>
-
             </div>
-
         `;
+        movieContainer.appendChild(  card  );
+  });
 
 
-        movieContainer.appendChild(
-            card
-        );
-
-    });
-
-
-    document
-        .querySelectorAll(
-            ".book-movie"
-        )
+    document .querySelectorAll( ".book-movie"  )
         .forEach(button => {
-
             button.addEventListener(
                 "click",
                 () => {
@@ -248,23 +176,13 @@ const renderMovies = (
                     openBooking(
                         button.dataset.id
                     );
-
                 }
             );
-
         });
-
 };
-
-
 const openBooking = async id => {
 
-    selectedMovie =
-        allMovies.find(
-            movie =>
-                movie.id === Number(id)
-        );
-
+    selectedMovie =  allMovies.find( movie => movie.id === Number(id) );
 
     selectedDate = null;
 
@@ -274,15 +192,9 @@ const openBooking = async id => {
 
     selectedSeats = [];
 
+    moviesSection.classList.add("hidden" );
 
-    moviesSection.classList.add(
-        "hidden"
-    );
-
-    bookingSection.classList.remove(
-        "hidden"
-    );
-
+    bookingSection.classList.remove( "hidden" );
 
     renderSelectedMovie();
 
@@ -296,14 +208,8 @@ const openBooking = async id => {
 
     updateSummary();
 
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-
+    window.scrollTo({  top: 0,  behavior: "smooth" });
 };
-
 
 const renderSelectedMovie = () => {
 
@@ -313,7 +219,6 @@ const renderSelectedMovie = () => {
             src="${selectedMovie.image}"
             alt="${selectedMovie.title}"
         >
-
         <div>
 
             <p class="small-title">
@@ -338,16 +243,11 @@ const renderSelectedMovie = () => {
             </strong>
 
         </div>
-
     `;
-
 };
-
-
 const renderDates = () => {
 
     dateContainer.innerHTML = "";
-
 
     for (
         let i = 0;
@@ -355,86 +255,48 @@ const renderDates = () => {
         i++
     ) {
 
-        const date =
-            new Date();
+        const date =  new Date();
 
-        date.setDate(
-            date.getDate() + i
-        );
+        date.setDate( date.getDate() + i );
 
+        const value = date .toISOString() .split("T")[0];
 
-        const value =
-            date
-                .toISOString()
-                .split("T")[0];
+        const button =  document.createElement("button" );
 
-
-        const button =
-            document.createElement(
-                "button"
-            );
-
-
-        button.innerText =
-            date.toLocaleDateString(
-                "en-IN",
+        button.innerText = date.toLocaleDateString( "en-IN",
                 {
                     weekday: "short",
                     day: "numeric",
                     month: "short"
                 }
             );
+        button.dataset.date = value;
 
+        button.addEventListener( "click", () => {
 
-        button.dataset.date =
-            value;
-
-
-        button.addEventListener(
-            "click",
-            () => {
-
-                selectedDate =
-                    value;
+                selectedDate = value;
 
                 selectedSeats = [];
 
-                document
-                    .querySelectorAll(
-                        ".date-container button"
-                    )
-                    .forEach(
-                        item =>
-                            item.classList.remove(
-                                "active"
-                            )
+                document .querySelectorAll( ".date-container button")
+                    .forEach( item => item.classList.remove( "active")
                     );
 
-                button.classList.add(
-                    "active"
-                );
+                button.classList.add( "active");
 
                 renderSeats();
 
                 updateSummary();
-
             }
         );
-
-
         dateContainer.appendChild(
             button
         );
-
     }
-
 };
-
-
 const renderTheatres = () => {
 
     theatreContainer.innerHTML = "";
-
 
     theatres.forEach(
         theatre => {
@@ -869,8 +731,6 @@ document
                         selectedMovie.price
 
                 };
-
-
                 const result =
                     await createBooking(
                         booking
@@ -1232,30 +1092,14 @@ document
 
 
 if (
-    localStorage.getItem(
-        "movieTheme"
-    ) === "dark"
+    localStorage.getItem( "movieTheme") === "dark"
 ) {
-
-    document.body.classList.add(
-        "dark"
-    );
-
+    document.body.classList.add(  "dark" );
 }
-
-
 const init = async () => {
 
-    allMovies =
-        await getMovies();
-
-    renderMovies(
-        allMovies
-    );
-
+    allMovies = await getMovies();
+    renderMovies( allMovies );
     renderBookingHistory();
-
 };
-
-
 init();
