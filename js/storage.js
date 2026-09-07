@@ -7,7 +7,9 @@ export const getBookings = () => {
 };
 export const saveBookings = ( booking ) => {
 
-    localStorage.setItem( STORAGE_KEY, JSON.stringify(bookings)
+    localStorage.setItem(
+         STORAGE_KEY, 
+         JSON.stringify(bookings)
     );
 };
 
@@ -27,7 +29,7 @@ export const cancelBooking = ( bookingId) => {
 export const clearBookings = () => {
 
   localStorage.removeItem(STORAGE_KEY);
-}; g
+}; 
 export const getBookedSeats = (
     movieId,
     date,
